@@ -1,20 +1,20 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <CandlestickChart />
 
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+  <CandlestickChart />
+  <CandlestickChartAPI />
+
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import CandlestickChart from './components/CandlestickChart.vue';
+import CandlestickChartAPI from './components/CandlestickChartAPI.vue';
 
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld, 
-    CandlestickChart
+    CandlestickChart,
+    CandlestickChartAPI
   }
 }
 </script>
