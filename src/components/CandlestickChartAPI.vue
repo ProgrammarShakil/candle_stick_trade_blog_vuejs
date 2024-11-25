@@ -14,7 +14,7 @@
       return {
         series: [
           {
-            data: [], // Initialize empty data for dynamic updates
+            data: [],
           },
         ],
         chartOptions: {
@@ -41,7 +41,7 @@
     methods: {
       async fetchData() {
         const apiUrl =
-          ' https://marketdata.tradermade.com/api/v1/historical?api_key=Jar60UU4VUxymHo0hdm2&currency=USDTMATIC,EUROMR,ALLUSDT,USDTWD,ALLBUSD,ALLEUR,ALLLBP,ALLXAG,AVAXXTZ&date=2024-11-24';
+          'https://marketdata.tradermade.com/api/v1/historical?api_key=Jar60UU4VUxymHo0hdm2&currency=USDTMATIC,EUROMR,ALLUSDT,USDTWD,ALLBUSD,ALLEUR,ALLLBP,ALLXAG,AVAXXTZ&date=2024-11-24';
   
         try {
           const response = await fetch(apiUrl);
