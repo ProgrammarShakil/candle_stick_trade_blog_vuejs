@@ -1,18 +1,18 @@
 <template>
-  <CandlestickChart />
-  <!-- <CandlestickChartAPI /> -->
+  <!-- <CandlestickChart /> -->
+  <CandlestickChartAPI />
 </template>
 
 <script>
-import CandlestickChart from './components/CandlestickChart.vue';
-// import CandlestickChartAPI from './components/CandlestickChartAPI.vue';
+// import CandlestickChart from './components/CandlestickChart.vue';
+import CandlestickChartAPI from './components/CandlestickChartAPI.vue';
 
 
 export default {
   name: 'App',
   components: {
-    CandlestickChart,
-    // CandlestickChartAPI
+    // CandlestickChart,
+    CandlestickChartAPI
   }
 }
 </script>
