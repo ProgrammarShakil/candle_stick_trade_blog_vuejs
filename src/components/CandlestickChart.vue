@@ -23,7 +23,7 @@
     </nav>
 
 
-    <marquee behavior="" direction="">
+    <marquee behavior="slide" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
       <div class="flex space-x-6 p-4 bg-white rounded shadow">
         <!-- Item 1 -->
         <div class="flex items-center space-x-2">
@@ -39,6 +39,51 @@
               class="w-4 h-4 inline"></span>
           <span class="font-semibold text-gray-900">421.14</span>
           <span class="text-red-500 font-medium">-2.64 (-0.62%)</span>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/spdr-sandp500-etf-tr.svg" alt="EU logo"
+              class="w-4 h-4 inline"></span>
+          <span class="font-semibold text-gray-900">614.780</span>
+          <span class="text-red-500 font-medium">-2.1700 (-0.35%)</span>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo"
+              class="w-4 h-4 inline"></span>
+          <span class="font-semibold text-gray-900">1.07946</span>
+        </div>
+        <!-- Item 1 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo" class="w-4 h-4 inline">
+          </span>
+          <span class="font-semibold text-gray-900">495.32</span>
+          <span class="text-green-500 font-medium">+3.00 (+0.61%)</span>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/invesco.svg" alt="EU logo"
+              class="w-4 h-4 inline"></span>
+          <span class="font-semibold text-gray-900">421.14</span>
+          <span class="text-red-500 font-medium">-2.64 (-0.62%)</span>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/spdr-sandp500-etf-tr.svg" alt="EU logo"
+              class="w-4 h-4 inline"></span>
+          <span class="font-semibold text-gray-900">614.780</span>
+          <span class="text-red-500 font-medium">-2.1700 (-0.35%)</span>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="flex items-center space-x-2">
+          <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo"
+              class="w-4 h-4 inline"></span>
+          <span class="font-semibold text-gray-900">1.07946</span>
         </div>
 
         <!-- Item 3 -->
@@ -129,6 +174,74 @@
       </div>
     </div>
   </div>
+
+    <!-- Table Section -->
+    <div class="mx-auto mt-8 p-4 bg-white shadow-md rounded-md">
+      <h2 class="text-2xl font-bold mb-4">Today's Events</h2>
+
+      <!-- Responsive Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300 text-sm">
+          <!-- Table Header -->
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="border p-2 text-left">Date</th>
+              <th class="border p-2 text-left">Time</th>
+              <th class="border p-2 text-left">Currency</th>
+              <th class="border p-2 text-left">Impact</th>
+              <th class="border p-2 text-left">Detail</th>
+              <th class="border p-2 text-center">Actual</th>
+              <th class="border p-2 text-center">Forecast</th>
+              <th class="border p-2 text-center">Previous</th>
+            </tr>
+          </thead>
+          <!-- Table Body -->
+          <tbody>
+            <!-- Sample Row -->
+            <tr>
+              <td class="border p-2">Nov 25</td>
+              <td class="border p-2">3:45am</td>
+              <td class="border p-2">NZD</td>
+              <td class="border p-2 text-center">
+                <span class="text-yellow-500 font-bold">⚠️</span>
+              </td>
+              <td class="border p-2">Retail Sales q/q</td>
+              <td class="border p-2 text-center text-green-500">-0.1%</td>
+              <td class="border p-2 text-center text-gray-700">-0.5%</td>
+              <td class="border p-2 text-center text-red-500">-1.2%</td>
+            </tr>
+            <!-- Additional Rows -->
+            <tr>
+              <td class="border p-2">Nov 25</td>
+              <td class="border p-2">3:00pm</td>
+              <td class="border p-2">EUR</td>
+              <td class="border p-2 text-center">
+                <span class="text-orange-500 font-bold">⚠️</span>
+              </td>
+              <td class="border p-2">German Ifo Business Climate</td>
+              <td class="border p-2 text-center text-gray-700">86.1</td>
+              <td class="border p-2 text-center text-gray-700">86.5</td>
+              <td class="border p-2 text-center text-gray-700">85.9</td>
+            </tr>
+            <tr>
+              <td class="border p-2">Nov 25</td>
+              <td class="border p-2">4:30pm</td>
+              <td class="border p-2">GBP</td>
+              <td class="border p-2 text-center">
+                <span class="text-yellow-500 font-bold">⚠️</span>
+              </td>
+              <td class="border p-2">MPC Member Dhingra Speaks</td>
+              <td class="border p-2 text-center">-</td>
+              <td class="border p-2 text-center">-</td>
+              <td class="border p-2 text-center">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
 </template>
 
 <script>
