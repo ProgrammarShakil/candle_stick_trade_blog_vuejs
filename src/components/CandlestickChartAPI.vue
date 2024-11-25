@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-md mx-auto p-4 bg-green-600 shadow-lg rounded-lg">
+    <div >
       <h2 class="text-lg font-semibold mb-4">Candlestick Chart</h2>
       <apexchart type="candlestick" :options="chartOptions" :series="series" />
     </div>
