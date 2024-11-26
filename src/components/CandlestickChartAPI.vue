@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div>
       <nav class="border border-black text-sm">
         <div class="flex justify-between items-center px-4 py-2">
@@ -16,14 +15,12 @@
             <a href="#" class="hover:underline">Platform</a>
             <a href="#" class="hover:underline">Brokers</a>
           </div>
-
           <!-- Right Section -->
           <div>
             <a href="#" class="hover:underline">Login</a>
           </div>
         </div>
       </nav>
-
 
       <marquee behavior="slide" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
         <div class="flex space-x-6 p-4 bg-white rounded shadow">
@@ -57,7 +54,7 @@
                 class="w-4 h-4 inline"></span>
             <span class="font-semibold text-gray-900">1.07946</span>
           </div>
-          <!-- Item 1 -->
+          <!-- Item 5 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo" class="w-4 h-4 inline">
             </span>
@@ -65,7 +62,7 @@
             <span class="text-green-500 font-medium">+3.00 (+0.61%)</span>
           </div>
 
-          <!-- Item 2 -->
+          <!-- Item 6 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/invesco.svg" alt="EU logo"
                 class="w-4 h-4 inline"></span>
@@ -73,7 +70,7 @@
             <span class="text-red-500 font-medium">-2.64 (-0.62%)</span>
           </div>
 
-          <!-- Item 3 -->
+          <!-- Item 7 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/spdr-sandp500-etf-tr.svg" alt="EU logo"
                 class="w-4 h-4 inline"></span>
@@ -81,14 +78,14 @@
             <span class="text-red-500 font-medium">-2.1700 (-0.35%)</span>
           </div>
 
-          <!-- Item 4 -->
+          <!-- Item 8 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo"
                 class="w-4 h-4 inline"></span>
             <span class="font-semibold text-gray-900">1.07946</span>
           </div>
 
-          <!-- Item 3 -->
+          <!-- Item 9 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/spdr-sandp500-etf-tr.svg" alt="EU logo"
                 class="w-4 h-4 inline"></span>
@@ -96,16 +93,16 @@
             <span class="text-red-500 font-medium">-2.1700 (-0.35%)</span>
           </div>
 
-          <!-- Item 4 -->
+          <!-- Item 10 -->
           <div class="flex items-center space-x-2">
             <span class="font-medium text-gray-800"><img src="@/assets/img/EU.svg" alt="EU logo"
                 class="w-4 h-4 inline"></span>
             <span class="font-semibold text-gray-900">1.07946</span>
           </div>
         </div>
-
       </marquee>
     </div>
+
     <div class="inline-flex justify-left border border-black bg-yellow-300 divide-x divide-black text-black font-bold">
       <div class="px-4 py-2 hover:bg-yellow-500 cursor-pointer">Forex</div>
       <div class="px-4 py-2 hover:bg-yellow-500 cursor-pointer">Indices</div>
@@ -117,10 +114,25 @@
     </div>
 
     <div class="p-4 bg-white shadow mt-4">
-      <div class="grid grid-cols-7 gap-4">
-
+      <div class="grid grid-cols-9 gap-4">
         <div class="rounded-lg border bg-gray-100">
           <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><small>1.06787 {{}}</small></div>
+          <apexchart type="candlestick" :options="chartOptions" :series="series" />
+          <div class="text-center pb-2"><small class="text-green-500">11</small></div>
+          <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
+        </div>
+
+        <div class="rounded-lg border bg-gray-100">
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">GBP/USD</span></div>
+          <div class="text-center pt-2"><small>1.06787</small></div>
+          <apexchart type="candlestick" :options="chartOptions" :series="series" />
+          <div class="text-center pb-2"><small class="text-green-500">11</small></div>
+          <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
+        </div>
+
+        <div class="rounded-lg border bg-gray-100">
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/JPY</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -136,7 +148,7 @@
         </div>
 
         <div class="rounded-lg border bg-gray-100">
-          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/CHF</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -144,7 +156,7 @@
         </div>
 
         <div class="rounded-lg border bg-gray-100">
-          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/CAD</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -152,7 +164,7 @@
         </div>
 
         <div class="rounded-lg border bg-gray-100">
-          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">AUD/USD</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -160,7 +172,7 @@
         </div>
 
         <div class="rounded-lg border bg-gray-100">
-          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">NZD/USD</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -168,7 +180,7 @@
         </div>
 
         <div class="rounded-lg border bg-gray-100">
-          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
+          <div class="text-center pt-2"><span class="border p-1 bg-gray-50">GBP/JPY</span></div>
           <div class="text-center pt-2"><small>1.06787</small></div>
           <apexchart type="candlestick" :options="chartOptions" :series="series" />
           <div class="text-center pb-2"><small class="text-green-500">11</small></div>
@@ -179,7 +191,7 @@
 
     <!-- Table Section -->
     <div class="mx-auto mt-8 p-4 bg-white shadow-md rounded-md">
-      <h2 class="text-2xl font-bold mb-4">Today's Events</h2>
+      <h2 class="text-2xl font-bold mb-4">Today: Nov 26</h2>
 
       <!-- Responsive Table -->
       <div class="overflow-x-auto">
@@ -258,6 +270,7 @@ export default {
           data: [],
         },
       ],
+      currency: 'EURUSD',
       last_requested: null,
 
       chartOptions: {
@@ -281,6 +294,9 @@ export default {
           },
         },
         yaxis: {
+          // tooltip: {
+          //   enabled: true,
+          // },
           labels: {
             show: false, // Hide y-axis labels
           },
@@ -289,7 +305,7 @@ export default {
           show: false, // Hide gridlines
         },
       },
-      
+
       // chartOptions: {
       //   chart: {
       //     type: 'candlestick',
@@ -312,9 +328,10 @@ export default {
   },
 
   methods: {
+    // 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
+
     async fetchData() {
-      const apiUrl = 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30'
-      'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
+      const apiUrl = `https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=${this.currency}&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30`
 
       try {
         const response = await fetch(apiUrl);
