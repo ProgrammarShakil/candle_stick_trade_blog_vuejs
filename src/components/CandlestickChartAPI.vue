@@ -182,7 +182,7 @@
       </marquee>
     </div>
 
-    <div>
+    <div v-if="!selectedDetails">
       <!-- TAB  -->
       <div class="flex justify-left border border-black bg-custom divide-x divide-black text-white font-bold">
         <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Forex</div>
@@ -196,116 +196,32 @@
 
       <!-- Candle Card  -->
       <div class="p-4 bg-white shadow mt-4">
-        <div class="grid grid-cols-9 gap-4">
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
-            <div class="text-center pt-2"><small>1.06787 {{}}</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
+        <div v-if="currency_details?.length" class="grid grid-cols-9 gap-4">
+          <div v-for="crncy in currency_details" :key="crncy?.base_currency + crncy?.quote_currency"
+            class="rounded-lg border bg-custom-card">
+            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.quote_currency }} / {{
+              crncy?.base_currency }}</span></div>
+            <div class="text-center pt-2"><small>{{ crncy?.close }}</small></div>
+            <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
+              :series="crncy?.series" />
+            <div class="text-center pb-2"><small
+                :class="crncy?.close - crncy?.open > 0 ? 'text-green-500' : 'text-red-600'">{{ parseFloat(crncy?.close -
+                  crncy?.open).toFixed(3) }}</small></div>
+            <div class="text-center pb-2"><small class="text-green-500">{{ getPercentChange(crncy.open, crncy.close) }}
+                %</small></div>
             <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">GBP/USD</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/JPY</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">EUR/USD</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/CHF</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">USD/CAD</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">AUD/USD</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">NZD/USD</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
-          </div>
-
-          <div class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">GBP/JPY</span></div>
-            <div class="text-center pt-2"><small>1.06787</small></div>
-            <apexchart type="candlestick" :options="chartOptions" :series="series" />
-            <div class="text-center pb-2"><small class="text-green-500">11</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
-            <div class="text-center mb-2"><button
+              @click="openDetails(crncy)"
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                 Trade
               </button></div>
           </div>
         </div>
       </div>
+    </div>
+    <div v-else-if="selectedDetails" class="h-[80vh] w-full flex flex-col gap-3">
+      <button @click="openDetails(null)">Back</button>
+      <apexchart v-if="selectedDetails?.series && selectedDetails?.series[0]?.data" type="candlestick" :options="chartOptions"
+      :series="selectedDetails?.series" />
     </div>
 
     <!-- Table Section -->
@@ -406,9 +322,10 @@ export default {
           data: [],
         },
       ],
+      selectedDetails: null,
+      currency_details: [],
       currency: 'EURUSD',
       last_requested: null,
-
       chartOptions: {
         chart: {
           type: "candlestick",
@@ -460,14 +377,36 @@ export default {
       //     },
       //   },
       // },
+      currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF'],
     };
   },
 
   methods: {
-    // 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
+    openDetails(currency){
+      this.selectedDetails = currency
+    },
+    getPercentChange(openPrice, closePrice) {
+      // let  = 1.04767;
+      // let  = 1.04677;
 
-    async fetchData() {
-      const apiUrl = `https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=${this.currency}&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30`
+      // Calculate percentage change
+      return (((closePrice - openPrice) / openPrice) * 100).toFixed(2);
+    },
+    // 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
+    async getAllCurrencies() {
+      try {
+        const response = await fetch('https://marketdata.tradermade.com/api/v1/historical_currencies_list?api_key=fyBVOVMJLKetLiIlzdwd')
+        const data = await response.json();
+
+        this.currencies = data?.available_currencies
+        console.log(data);
+
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async fetchData(currency) {
+      const apiUrl = `https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=${currency}&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30`
 
       try {
         const response = await fetch(apiUrl);
@@ -483,21 +422,58 @@ export default {
             y: [q.open, q.high, q.low, q.close]
           }
         })
-
-        // Update the chart series dynamically
-        if (this.series?.length && this?.series[0].data?.length) {
-          this.series[0].data.push(formattedData)
-        } else {
-          this.series = [{ data: formattedData }];
+        const item = this.currency_details.find(el => el?.base_currency == data?.base_currency && el?.quote_currency == data?.quote_currency);
+        if (item) {
+          // Update the chart series dynamically
+          if (item?.series && item.series?.length && item?.series[0].data?.length) {
+            item.series[0].data.push(formattedData)
+          } else {
+            item.series = [{ data: formattedData }];
+          }
+          this.currency_details = this.currency_details.map((el) => {
+            if (el?.base_currency == data?.base_currency && el?.quote_currency == data?.quote_currency) return item;
+            return el
+          })
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     },
+    async getCurrencyDetail(currency) {
+      try {
+        const url = `https://marketdata.tradermade.com/api/v1/historical?api_key=fyBVOVMJLKetLiIlzdwd&currency=${currency}&date=${new Date().toISOString().split('T')[0]}`
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data)
+        this.currency_details = data.quotes
+        console.log(this.currency_details)
+        for (let i = 0; i < data.quotes.length; i++) {
+          await this.fetchData(`${data.quotes[i].base_currency}${data.quotes[i].quote_currency}`)
+        }
+
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
 
-  mounted() {
-    this.fetchData();
+  async mounted() {
+    // await this.getAllCurrencies();
+    if (this.currencies.length) {
+
+      let listStr = ''
+
+      for (let i = 0; i < this.currencies.length; i++) {
+        listStr += this.currencies[i]
+        if (i < this.currencies.length - 1) {
+          listStr += ','
+        }
+      }
+      listStr.slice(0, -1);
+      console.log(listStr)
+      await this.getCurrencyDetail(listStr)
+    }
+    // this.fetchData();
     // setInterval(() => {
     //   this.fetchData();
     // }, 10000)
