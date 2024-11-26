@@ -205,7 +205,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -217,7 +217,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -229,7 +229,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -241,7 +241,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -253,7 +253,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -265,7 +265,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -277,7 +277,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -289,7 +289,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
 
@@ -301,7 +301,7 @@
             <div class="text-center pb-2"><small class="text-green-500">0.11%</small></div>
             <div class="text-center mb-2"><button
                 class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Click Me
+                Trade
               </button></div>
           </div>
         </div>
