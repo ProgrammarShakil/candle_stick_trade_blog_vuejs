@@ -196,12 +196,12 @@
 
       <!-- Candle Card  -->
       <div class="p-4 bg-white shadow mt-4">
-        <div v-if="currency_details?.length" class="grid grid-cols-9 gap-4">
+        <div v-if="currency_details?.length" class="grid grid-cols-8 gap-4">
           <div v-for="crncy in currency_details" :key="crncy?.base_currency + crncy?.quote_currency"
             class="rounded-lg border bg-custom-card">
             <div class="hover:cursor-pointer" @click="openDetails(crncy)">
-              <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.quote_currency }} / {{
-                crncy?.base_currency }}</span></div>
+              <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.base_currency }} / {{
+                crncy?.quote_currency }}</span></div>
               <div class="text-center pt-2"><small>{{ crncy?.close }}</small></div>
               <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
                 :series="crncy?.series" />
@@ -389,7 +389,7 @@ export default {
       //     },
       //   },
       // },
-      currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF'],
+      currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF','USDCAD','AUDUSD','NZDUSD','GBPJPY'],
     };
   },
 
