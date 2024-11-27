@@ -223,7 +223,7 @@
       </div>
     </div>
 
-    <div v-else-if="selectedDetails" class="h-[80vh] w-full flex flex-col gap-3">
+    <div v-else-if="selectedDetails" class="w-full mb-3">
       <div class="grid grid-cols-2 gap-8 mx-3">
         <!-- <div class="border p-1 bg-gray-50">
           
@@ -233,7 +233,7 @@
             :options="chartOptions" :series="selectedDetails?.series" />
         </div>
       </div>
-      <button class="btn btn-sm border bg-custom text-white" @click="openDetails(null)">Back</button>
+      <button class="btn btn-sm border bg-custom text-white mt-4 ml-3 px-4 py-1 rounded" @click="openDetails(null)">Back</button>
     </div>
 
     <!-- Table Section -->
