@@ -199,29 +199,41 @@
         <div v-if="currency_details?.length" class="grid grid-cols-9 gap-4">
           <div v-for="crncy in currency_details" :key="crncy?.base_currency + crncy?.quote_currency"
             class="rounded-lg border bg-custom-card">
-            <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.quote_currency }} / {{
-              crncy?.base_currency }}</span></div>
-            <div class="text-center pt-2"><small>{{ crncy?.close }}</small></div>
-            <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
-              :series="crncy?.series" />
-            <div class="text-center pb-2"><small
-                :class="crncy?.close - crncy?.open > 0 ? 'text-green-500' : 'text-red-600'">{{ parseFloat(crncy?.close -
-                  crncy?.open).toFixed(3) }}</small></div>
-            <div class="text-center pb-2"><small class="text-green-500">{{ getPercentChange(crncy.open, crncy.close) }}
-                %</small></div>
-            <div class="text-center mb-2"><button
-              @click="openDetails(crncy)"
-                class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Trade
-              </button></div>
+            <div class="hover:cursor-pointer" @click="openDetails(crncy)">
+              <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.quote_currency }} / {{
+                crncy?.base_currency }}</span></div>
+              <div class="text-center pt-2"><small>{{ crncy?.close }}</small></div>
+              <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
+                :series="crncy?.series" />
+              <div class="text-center pb-2"><small
+                  :class="crncy?.close - crncy?.open > 0 ? 'text-green-500' : 'text-red-600'">{{ parseFloat(crncy?.close
+                    -
+                    crncy?.open).toFixed(3) }}</small></div>
+              <div class="text-center pb-2"><small class="text-green-500">{{ getPercentChange(crncy.open, crncy.close)
+                  }}
+                  %</small></div>
+              <div class="text-center mb-2"><button
+                  class="border text-sm border-blue-500 text-custom hover:text-white font-semibold px-6 rounded-lg hover:bg-custom focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                  Trade
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     <div v-else-if="selectedDetails" class="h-[80vh] w-full flex flex-col gap-3">
-      <button @click="openDetails(null)">Back</button>
-      <apexchart v-if="selectedDetails?.series && selectedDetails?.series[0]?.data" type="candlestick" :options="chartOptions"
-      :series="selectedDetails?.series" />
+      <div class="grid grid-cols-2 gap-8 mx-3">
+        <!-- <div class="border p-1 bg-gray-50">
+          
+        </div> -->
+        <div class="border p-1 bg-gray-50">
+          <apexchart v-if="selectedDetails?.series && selectedDetails?.series[0]?.data" type="candlestick"
+            :options="chartOptions" :series="selectedDetails?.series" />
+        </div>
+      </div>
+      <button class="btn btn-sm border bg-custom text-white" @click="openDetails(null)">Back</button>
     </div>
 
     <!-- Table Section -->
@@ -382,7 +394,7 @@ export default {
   },
 
   methods: {
-    openDetails(currency){
+    openDetails(currency) {
       this.selectedDetails = currency
     },
     getPercentChange(openPrice, closePrice) {
@@ -392,10 +404,10 @@ export default {
       // Calculate percentage change
       return (((closePrice - openPrice) / openPrice) * 100).toFixed(2);
     },
-    // 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
+    // 'https://marketdata.tradermade.com/api/v1/timeseries?api_key=zMxSI__fZMW_uyu5HAfr&currency=USDEUR&format=index&start_date=2024-10-25-10:00&end_date=2024-11-25-05:00&interval=hourly&period=24'
     async getAllCurrencies() {
       try {
-        const response = await fetch('https://marketdata.tradermade.com/api/v1/historical_currencies_list?api_key=fyBVOVMJLKetLiIlzdwd')
+        const response = await fetch('https://marketdata.tradermade.com/api/v1/historical_currencies_list?api_key=zMxSI__fZMW_uyu5HAfr')
         const data = await response.json();
 
         this.currencies = data?.available_currencies
@@ -406,7 +418,7 @@ export default {
       }
     },
     async fetchData(currency) {
-      const apiUrl = `https://marketdata.tradermade.com/api/v1/timeseries?api_key=fyBVOVMJLKetLiIlzdwd&currency=${currency}&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30`
+      const apiUrl = `https://marketdata.tradermade.com/api/v1/timeseries?api_key=zMxSI__fZMW_uyu5HAfr&currency=${currency}&format=index&start_date=2024-11-24-10:00&end_date=2024-11-25-05:00&interval=minute&period=30`
 
       try {
         const response = await fetch(apiUrl);
@@ -441,7 +453,8 @@ export default {
     },
     async getCurrencyDetail(currency) {
       try {
-        const url = `https://marketdata.tradermade.com/api/v1/historical?api_key=fyBVOVMJLKetLiIlzdwd&currency=${currency}&date=${new Date().toISOString().split('T')[0]}`
+        // const url = `https://marketdata.tradermade.com/api/v1/historical?api_key=zMxSI__fZMW_uyu5HAfr&currency=${currency}&date=${new Date().toISOString().split('T')[0]}`
+        const url = `https://marketdata.tradermade.com/api/v1/historical?api_key=zMxSI__fZMW_uyu5HAfr&currency=${currency}&date=${new Date().toLocaleDateString('en-CA')}`
         const response = await fetch(url);
         const data = await response.json();
         console.log(data)
