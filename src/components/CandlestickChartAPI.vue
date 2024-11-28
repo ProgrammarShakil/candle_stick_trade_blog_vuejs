@@ -1,26 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <nav class="border border-black text-sm">
-        <div class="flex justify-between items-center px-4 py-2">
-          <div class="flex space-x-4">
-            <a href="#" class="hover:underline">Market</a>
-            <a href="#" class="hover:underline">Calendar</a>
-            <a href="#" class="hover:underline">Tool</a>
-            <a href="#" class="hover:underline">Forum</a>
-            <a href="#" class="hover:underline">Blog</a>
-            <a href="#" class="hover:underline">News flows</a>
-            <a href="#" class="hover:underline">Education</a>
-            <a href="#" class="hover:underline">Platform</a>
-            <a href="#" class="hover:underline">Brokers</a>
-          </div>
-          <div>
-            <a href="#" class="hover:underline">Login</a>
-          </div>
-        </div>
-      </nav> -->
-
-
       <nav class="bg-gray-800">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div class="relative flex h-16 items-center justify-between">
@@ -185,26 +165,29 @@
     <div v-if="!selectedDetails">
       <!-- TAB  -->
       <div class="flex justify-left border border-black bg-custom divide-x divide-black text-white font-bold">
-        <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Forex</div>
+        <div @click="changeTab('forex')" :class="selectedTab == 'forex' ? 'bg-gray-200 text-slate-900' : ''"
+          class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Forex</div>
         <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Indices</div>
-        <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Crypto</div>
-        <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Stocks</div>
+        <div @click="changeTab('crypto')" :class="selectedTab == 'crypto' ? 'bg-gray-200 text-slate-900' : ''"
+          class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Crypto</div>
+        <div @click="changeTab('stocks')" :class="selectedTab == 'stocks' ? 'bg-gray-200 text-slate-900' : ''"
+          class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Stocks</div>
         <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Futures</div>
         <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">ETFs</div>
         <div class="px-4 py-2 hover:bg-custom-secondary cursor-pointer">Bonds</div>
       </div>
 
       <!-- Candle Card  -->
-      <div class="p-4 bg-white shadow mt-4">
-        <div v-if="currency_details?.length" class="grid grid-cols-8 gap-4">
-          <div v-for="crncy in currency_details" :key="crncy?.base_currency + crncy?.quote_currency"
-            class="rounded-lg border bg-custom-card">
+      
+      <carousel :items-to-show="7">
+        <slide v-for="crncy in currency_details" :key="crncy?.base_currency + crncy?.quote_currency">
+          <div class="rounded-lg border bg-custom-card">
             <div class="hover:cursor-pointer" @click="openDetails(crncy)">
               <div class="text-center pt-2"><span class="border p-1 bg-gray-50">{{ crncy?.base_currency }} / {{
                 crncy?.quote_currency }}</span></div>
               <div class="text-center pt-2"><small>{{ crncy?.close }}</small></div>
-              <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
-                :series="crncy?.series" />
+              <!-- <apexchart v-if="crncy?.series && crncy?.series[0]?.data" type="candlestick" :options="chartOptions"
+                :series="crncy?.series" /> -->
               <div class="text-center pb-2"><small
                   :class="crncy?.close - crncy?.open > 0 ? 'text-green-500' : 'text-red-600'">{{ parseFloat(crncy?.close
                     -
@@ -219,9 +202,15 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </slide>
+
+        <template #addons>
+          <navigation />
+        </template>
+      </carousel>
     </div>
+
+
 
     <div v-else-if="selectedDetails" class="w-full mb-3">
       <div class="grid grid-cols-2 gap-8 mx-3">
@@ -233,7 +222,8 @@
             :options="chartOptions" :series="selectedDetails?.series" />
         </div>
       </div>
-      <button class="btn btn-sm border bg-custom text-white mt-4 ml-3 px-4 py-1 rounded" @click="openDetails(null)">Back</button>
+      <button class="btn btn-sm border bg-custom text-white mt-4 ml-3 px-4 py-1 rounded"
+        @click="openDetails(null)">Back</button>
     </div>
 
     <!-- Table Section -->
@@ -324,18 +314,192 @@
 
 <script>
 import apexchart from 'vue3-apexcharts';
-
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 export default {
-  components: { apexchart },
+  components: { apexchart, Carousel, Slide, Navigation },
   data() {
     return {
+      lastValue: 7,
+      previousValue: 0,
       series: [
         {
           data: [],
         },
       ],
+      selectedTab: 'forex',
       selectedDetails: null,
-      currency_details: [],
+      currency_details: [
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT2',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT4',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT76',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT688',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT45t',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT4564',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT345467',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT456',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT4356',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+        {
+          base_currency: 'BDT',
+          quote_currency: 'USDT1',
+          close: 22,
+          open: 23,
+        },
+      ],
+      shown_currency_details: [],
       currency: 'EURUSD',
       last_requested: null,
       chartOptions: {
@@ -371,29 +535,74 @@ export default {
         },
       },
 
-      // chartOptions: {
-      //   chart: {
-      //     type: 'candlestick',
-      //     height: 350,
-      //   },
-      //   title: {
-      //     text: 'Candlestick Chart',
-      //     align: 'left',
-      //   },
-      //   xaxis: {
-      //     type: 'datetime',
-      //   },
-      //   yaxis: {
-      //     tooltip: {
-      //       enabled: true,
-      //     },
-      //   },
-      // },
-      currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF','USDCAD','AUDUSD','NZDUSD','GBPJPY'],
+      crypto_currencies: [
+        "ETHUSDT",
+        "BNBUSD",
+        "BTCEUR",
+        "ETHEUR",
+        "BTCGBP",
+        "ETHGBP",
+        "XRPUSD",
+        "ADAUSD",
+        // "SOLUSD",
+        // "LTCUSD",
+        // "DOGEUSD",
+        // "BNBUSDT",
+        // "XRPUSDT",
+        // "LTCUSDT",
+        // "ADAUSDT",
+        // "SOLUSDT",
+        // "DOGEUSDT"
+      ],
+      currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'USDCAD', 'AUDUSD', 'NZDUSD', 'GBPJPY'],
+      current_currencies: [],
     };
   },
-
+  watch: {
+    currency_details() {
+      this.shown_currency_details = this.currency_details.slice(0, 7)
+    }
+  },
   methods: {
+    arrowClick(type) {
+      this.shown_currency_details = []
+      if (type == 'back') {
+        if (this.previousValue >= 0 && this.previousValue >= 7) {
+          this.previousValue = this.previousValue - 7
+          this.lastValue = this.lastValue - 7
+        } else {
+          this.previousValue = 0
+          this.lastValue = 7
+        }
+      } else if (type == 'forward') {
+        this.previousValue = this.previousValue + 7
+        this.lastValue = this.lastValue + 7
+
+      }
+      this.shown_currency_details = this.currency_details.slice(this.previousValue, this.lastValue)
+      console.log(this.shown_currency_details, this.previousValue, this.lastValue)
+    },
+    async changeTab(tab) {
+      this.selectedDetails = false
+      this.currency_details = []
+      this.selectedTab = tab
+      let listStr = ''
+      if (tab == 'forex') this.current_currencies = this.currencies
+      else if (tab == 'crypto') this.current_currencies = this.crypto_currencies
+      if (this.current_currencies.length) {
+        for (let i = 0; i < this.current_currencies.length; i++) {
+          listStr += this.current_currencies[i]
+          if (i < this.current_currencies.length - 1) {
+            listStr += ','
+          }
+        }
+        listStr.slice(0, -1);
+        console.log(listStr)
+        await this.getCurrencyDetail(listStr)
+      }
+
+
+    },
     openDetails(currency) {
       this.selectedDetails = currency
     },
@@ -458,10 +667,11 @@ export default {
         const response = await fetch(url);
         const data = await response.json();
         console.log(data)
-        this.currency_details = data.quotes
+        const quotes = data?.quotes.filter(item => !item?.error && item?.high && item?.low && item?.close && item?.open)
+        this.currency_details = quotes
         console.log(this.currency_details)
-        for (let i = 0; i < data.quotes.length; i++) {
-          await this.fetchData(`${data.quotes[i].base_currency}${data.quotes[i].quote_currency}`)
+        for (let i = 0; i < quotes.length; i++) {
+          await this.fetchData(`${quotes[i].base_currency}${quotes[i].quote_currency}`)
         }
 
       } catch (e) {
@@ -471,25 +681,21 @@ export default {
   },
 
   async mounted() {
-    // await this.getAllCurrencies();
-    if (this.currencies.length) {
-
-      let listStr = ''
-
-      for (let i = 0; i < this.currencies.length; i++) {
-        listStr += this.currencies[i]
-        if (i < this.currencies.length - 1) {
-          listStr += ','
-        }
-      }
-      listStr.slice(0, -1);
-      console.log(listStr)
-      await this.getCurrencyDetail(listStr)
-    }
-    // this.fetchData();
-    // setInterval(() => {
-    //   this.fetchData();
-    // }, 10000)
+    // if (this.selectedTab == 'forex') this.current_currencies = this.currencies
+    // else if (this.selectedTab == 'crypto') this.current_currencies = this.currencies
+    // let listStr = ''
+    // if (this.current_currencies.length) {
+    //   for (let i = 0; i < this.current_currencies.length; i++) {
+    //     listStr += this.current_currencies[i]
+    //     if (i < this.current_currencies.length - 1) {
+    //       listStr += ','
+    //     }
+    //   }
+    //   listStr.slice(0, -1);
+    //   console.log(listStr)
+    //   await this.getCurrencyDetail(listStr)
+    // }
+    this.shown_currency_details = this.currency_details.slice(0, 7)
   },
 };
 </script>
